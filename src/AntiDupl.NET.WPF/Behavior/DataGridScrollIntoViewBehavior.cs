@@ -29,7 +29,7 @@ namespace AntiDupl.NET.WPF.Behavior
             AssociatedObject.SelectionChanged += AssociatedObject_SelectionChanged;
         }
 
-        void AssociatedObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void AssociatedObject_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (AssociatedObject is DataGrid)
             {
@@ -47,7 +47,5 @@ namespace AntiDupl.NET.WPF.Behavior
         {
             AssociatedObject.SelectionChanged -= AssociatedObject_SelectionChanged;
         }
-
-
     }
 }

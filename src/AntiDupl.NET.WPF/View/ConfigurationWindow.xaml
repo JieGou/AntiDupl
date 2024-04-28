@@ -1,23 +1,27 @@
-﻿<Window x:Class="AntiDupl.NET.WPF.View.ConfigurationWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:behavior="clr-namespace:AntiDupl.NET.WPF.Behavior"
-        xmlns:core="clr-namespace:AntiDupl.NET.Core.Enums;assembly=AntiDupl.NET.Core"
-        Title="ConfigurationWindow"
-        Height="400" Width="500"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:viewModel="clr-namespace:AntiDupl.NET.WPF.ViewModel"
-        xmlns:convertor="clr-namespace:AntiDupl.NET.WPF.Convertor"
-        mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance viewModel:ConfigurationViewModel, IsDesignTimeCreatable=False}">
+﻿<Window
+    x:Class="AntiDupl.NET.WPF.View.ConfigurationWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behavior="clr-namespace:AntiDupl.NET.WPF.Behavior"
+    xmlns:convertor="clr-namespace:AntiDupl.NET.WPF.Convertor"
+    xmlns:core="clr-namespace:AntiDupl.NET.Core.Enums;assembly=AntiDupl.NET.Core"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:system="clr-namespace:System;assembly=mscorlib"
+    xmlns:viewModel="clr-namespace:AntiDupl.NET.WPF.ViewModel"
+    Title="ConfigurationWindow"
+    Width="500"
+    Height="400"
+    d:DataContext="{d:DesignInstance viewModel:ConfigurationViewModel,
+                                     IsDesignTimeCreatable=False}"
+    mc:Ignorable="d">
     <Window.Resources>
         <convertor:ColorToSolidColorBrushConverter x:Key="ColorToSolidColorBrushConverter" />
-        <ObjectDataProvider x:Key="Algorithms"
-                            MethodName="GetValues"
-                            ObjectType="{x:Type system:Enum}">
+        <ObjectDataProvider
+            x:Key="Algorithms"
+            MethodName="GetValues"
+            ObjectType="{x:Type system:Enum}">
             <ObjectDataProvider.MethodParameters>
                 <x:Type TypeName="core:AlgorithmComparing" />
             </ObjectDataProvider.MethodParameters>
@@ -72,29 +76,51 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="{DynamicResource configurationWindow_thumbnailWidth}" />
-                <TextBox Grid.Column="1" Grid.Row="0"
-                         Text="{Binding ThumbnailWidth, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Text="{DynamicResource configurationWindow_thumbnailWidth}" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding ThumbnailWidth, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="{DynamicResource configurationWindow_maxCachedThumbnail}" />
-                <TextBox Grid.Column="1" Grid.Row="1"
-                         Text="{Binding Configuration.MaxCachedThumbnail, UpdateSourceTrigger=PropertyChanged}" />
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="{DynamicResource configurationWindow_maxCachedThumbnail}" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding Configuration.MaxCachedThumbnail, UpdateSourceTrigger=PropertyChanged}" />
 
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="{DynamicResource configurationWindow_GoodColor}" />
-                <Button Grid.Column="1" Grid.Row="2"
-                        Command="{Binding ChangeGoodColorCommand}"
-                        Style="{StaticResource ColorSelectButtonStyle}"
-                        Background="{Binding Configuration.GoodColor, Converter={StaticResource ColorToSolidColorBrushConverter}}" />
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="{DynamicResource configurationWindow_GoodColor}" />
+                <Button
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Background="{Binding Configuration.GoodColor, Converter={StaticResource ColorToSolidColorBrushConverter}}"
+                    Command="{Binding ChangeGoodColorCommand}"
+                    Style="{StaticResource ColorSelectButtonStyle}" />
 
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="{DynamicResource configurationWindow_BadColor}" />
-                <Button Grid.Column="1" Grid.Row="3"
-                        Command="{Binding ChangeBadColorCommand}"
-                        Style="{StaticResource ColorSelectButtonStyle}"
-                        Background="{Binding Configuration.BadColor, Converter={StaticResource ColorToSolidColorBrushConverter}}" />
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="{DynamicResource configurationWindow_BadColor}" />
+                <Button
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Background="{Binding Configuration.BadColor, Converter={StaticResource ColorToSolidColorBrushConverter}}"
+                    Command="{Binding ChangeBadColorCommand}"
+                    Style="{StaticResource ColorSelectButtonStyle}" />
 
-                <CheckBox Grid.Column="0" Grid.Row="4"
-                          Content="{DynamicResource configurationWindow_SaveResultInCurrentFile}"
-                          IsChecked="{Binding Configuration.SaveResultInCurrentFile, UpdateSourceTrigger=PropertyChanged}" />
+                <CheckBox
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="{DynamicResource configurationWindow_SaveResultInCurrentFile}"
+                    IsChecked="{Binding Configuration.SaveResultInCurrentFile, UpdateSourceTrigger=PropertyChanged}" />
             </Grid>
         </TabItem>
         <TabItem Header="SearchOption">
@@ -103,8 +129,14 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <CheckBox Grid.Row="0" Content="system" IsChecked="{Binding System}" />
-                <CheckBox Grid.Row="1" Content="hidden" IsChecked="{Binding Hidden}" />
+                <CheckBox
+                    Grid.Row="0"
+                    Content="system"
+                    IsChecked="{Binding System}" />
+                <CheckBox
+                    Grid.Row="1"
+                    Content="hidden"
+                    IsChecked="{Binding Hidden}" />
             </Grid>
         </TabItem>
         <TabItem Header="CompareOption">
@@ -127,51 +159,96 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <CheckBox Grid.Column="0" Grid.Row="0" Content="CheckOnEquality" IsChecked="{Binding CheckOnEquality}" />
-                <CheckBox Grid.Column="0" Grid.Row="1" Content="TransformedImage"
-                          IsChecked="{Binding TransformedImage}" />
-                <CheckBox Grid.Column="0" Grid.Row="2" Content="SizeControl" IsChecked="{Binding SizeControl}" />
-                <CheckBox Grid.Column="0" Grid.Row="3" Content="TypeControl" IsChecked="{Binding TypeControl}" />
-                <CheckBox Grid.Column="0" Grid.Row="4" Content="RatioControl" IsChecked="{Binding RatioControl}" />
+                <CheckBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="CheckOnEquality"
+                    IsChecked="{Binding CheckOnEquality}" />
+                <CheckBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="TransformedImage"
+                    IsChecked="{Binding TransformedImage}" />
+                <CheckBox
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="SizeControl"
+                    IsChecked="{Binding SizeControl}" />
+                <CheckBox
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="TypeControl"
+                    IsChecked="{Binding TypeControl}" />
+                <CheckBox
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="RatioControl"
+                    IsChecked="{Binding RatioControl}" />
 
-                <Grid Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5">
+                <Grid
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Text="Algorithm" />
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding Source={StaticResource Algorithms}}"
-                              SelectedItem="{Binding Path=AlgorithmComparing}" />
+                    <ComboBox
+                        Grid.Column="1"
+                        ItemsSource="{Binding Source={StaticResource Algorithms}}"
+                        SelectedItem="{Binding Path=AlgorithmComparing}" />
                 </Grid>
 
-                <TextBlock Grid.Column="0" Grid.Row="6" Text="ThresholdDifference" />
-                <TextBox Grid.Column="1" Grid.Row="6"
-                         Text="{Binding ThresholdDifference, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Text="ThresholdDifference" />
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Text="{Binding ThresholdDifference, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="3" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="3" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="7" Text="MinimalImageSize" />
-                <TextBox Grid.Column="1" Grid.Row="7"
-                         Text="{Binding MinimalImageSize, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Text="MinimalImageSize" />
+                <TextBox
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Text="{Binding MinimalImageSize, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="8" Text="MaximalImageSize" />
-                <TextBox Grid.Column="1" Grid.Row="8"
-                         Text="{Binding MaximalImageSize, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Text="MaximalImageSize" />
+                <TextBox
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Text="{Binding MaximalImageSize, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <CheckBox Grid.Column="0" Grid.Row="9" Content="CompareInsideOneFolder"
-                          IsChecked="{Binding CompareInsideOneFolder}" />
-                <CheckBox Grid.Column="0" Grid.Row="10" Content="CompareInsideOneSearchPath"
-                          IsChecked="{Binding CompareInsideOneSearchPath}" />
+                <CheckBox
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Content="CompareInsideOneFolder"
+                    IsChecked="{Binding CompareInsideOneFolder}" />
+                <CheckBox
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Content="CompareInsideOneSearchPath"
+                    IsChecked="{Binding CompareInsideOneSearchPath}" />
             </Grid>
         </TabItem>
         <TabItem Header="AdvancedOption">
@@ -190,49 +267,79 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="RatioResolution" />
-                <TextBox Grid.Column="1" Grid.Row="1"
-                         Text="{Binding RatioResolution, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Text="RatioResolution" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding RatioResolution, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="CompareThreadCount" />
-                <TextBox Grid.Column="1" Grid.Row="2"
-                         Text="{Binding CompareThreadCount, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="CompareThreadCount" />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding CompareThreadCount, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="CollectThreadCount" />
-                <TextBox Grid.Column="1" Grid.Row="3"
-                         Text="{Binding CollectThreadCount, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Text="CollectThreadCount" />
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="{Binding CollectThreadCount, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
 
-                <TextBlock Grid.Column="0" Grid.Row="4" Text="ReducedImageSize" />
-                <TextBox Grid.Column="1" Grid.Row="4"
-                         Text="{Binding ReducedImageSize, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Text="ReducedImageSize" />
+                <TextBox
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Text="{Binding ReducedImageSize, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
-                <TextBlock Grid.Column="0" Grid.Row="5" Text="ResultCountMax" />
-                <TextBox Grid.Column="1" Grid.Row="5"
-                         Text="{Binding ResultCountMax, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Text="ResultCountMax" />
+                <TextBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Text="{Binding ResultCountMax, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
-                <TextBlock Grid.Column="0" Grid.Row="6" Text="IgnoreFrameWidth" />
-                <TextBox Grid.Column="1" Grid.Row="6"
-                         Text="{Binding IgnoreFrameWidth, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Text="IgnoreFrameWidth" />
+                <TextBox
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Text="{Binding IgnoreFrameWidth, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="50" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="50" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </Grid>
@@ -257,30 +364,50 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <CheckBox Grid.Column="0" Grid.Row="0" Content="CheckOnDefect"
-                          IsChecked="{Binding Option.defectOptions.CheckOnDefect}" />
-                <CheckBox Grid.Column="0" Grid.Row="1" Content="CheckOnBlockiness"
-                          IsChecked="{Binding Option.defectOptions.CheckOnBlockiness}" />
+                <CheckBox
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="CheckOnDefect"
+                    IsChecked="{Binding Option.defectOptions.CheckOnDefect}" />
+                <CheckBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="CheckOnBlockiness"
+                    IsChecked="{Binding Option.defectOptions.CheckOnBlockiness}" />
 
-
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="BlockinessThreshold" />
-                <TextBox Grid.Column="1" Grid.Row="2"
-                         Text="{Binding Option.defectOptions.BlockinessThreshold, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Text="BlockinessThreshold" />
+                <TextBox
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding Option.defectOptions.BlockinessThreshold, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="3" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="3" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
-                <CheckBox Grid.Column="0" Grid.Row="3" Content="CheckOnBlockinessOnlyNotJpeg"
-                          IsChecked="{Binding Option.defectOptions.CheckOnBlockinessOnlyNotJpeg}" />
-                <CheckBox Grid.Column="0" Grid.Row="4" Content="CheckOnBlurring"
-                          IsChecked="{Binding Option.defectOptions.CheckOnBlurring}" />
+                <CheckBox
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="CheckOnBlockinessOnlyNotJpeg"
+                    IsChecked="{Binding Option.defectOptions.CheckOnBlockinessOnlyNotJpeg}" />
+                <CheckBox
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="CheckOnBlurring"
+                    IsChecked="{Binding Option.defectOptions.CheckOnBlurring}" />
 
-
-                <TextBlock Grid.Column="0" Grid.Row="5" Text="BlurringThreshold" />
-                <TextBox Grid.Column="1" Grid.Row="5"
-                         Text="{Binding Option.defectOptions.BlurringThreshold, UpdateSourceTrigger=PropertyChanged}">
+                <TextBlock
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Text="BlurringThreshold" />
+                <TextBox
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Text="{Binding Option.defectOptions.BlurringThreshold, UpdateSourceTrigger=PropertyChanged}">
                     <i:Interaction.Behaviors>
-                        <behavior:AllowableCharactersTextBoxBehavior RegularExpression="^[0-9.\-]+$" MaxLength="3" />
+                        <behavior:AllowableCharactersTextBoxBehavior MaxLength="3" RegularExpression="^[0-9.\-]+$" />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </Grid>

@@ -16,22 +16,24 @@ namespace AntiDupl.NET.WPF.Control
 {
     public class SearchControl : ContentControl
     {
-        #region Поля
+        #region field
+
         //private TextBox _filterNameTextBox;
         //private ComboBox _filterTypeComboBox;
         //private CheckBox _isSearchByType;
         //private Button _selectType;
         //private TextBox _filterReplacementTextBox;
-        #endregion
 
-        #region Конструкторы
+        #endregion field
+
+        #region constructor
 
         static SearchControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(SearchControl), new FrameworkPropertyMetadata(typeof(SearchControl)));
         }
 
-        #endregion
+        #endregion constructor
 
         public override void OnApplyTemplate()
         {
@@ -45,7 +47,7 @@ namespace AntiDupl.NET.WPF.Control
             //_filterTypeComboBox.ItemsSource = MainViewModel.AvailableTypeOfTool;
         }
 
-        #region Свойства зависимостей
+        #region Dependency properties
 
         //public string FilterName
         //{
@@ -89,7 +91,6 @@ namespace AntiDupl.NET.WPF.Control
         public static readonly DependencyProperty ClearCommandProperty = DependencyProperty.Register("ClearCommand",
             typeof(ICommand), typeof(SearchControl), new PropertyMetadata(null));
 
-
         public string SearchText
         {
             get { return (string)GetValue(SearchTextProperty); }
@@ -99,7 +100,7 @@ namespace AntiDupl.NET.WPF.Control
         public static readonly DependencyProperty SearchTextProperty = DependencyProperty.Register("SearchText",
             typeof(string), typeof(SearchControl), new PropertyMetadata("", OnSearchTextChanged));
 
-        static void OnSearchTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnSearchTextChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             SearchControl control = d as SearchControl;
             if (String.IsNullOrEmpty((string)e.NewValue) && !String.IsNullOrEmpty((string)e.OldValue)
@@ -114,9 +115,8 @@ namespace AntiDupl.NET.WPF.Control
         }
 
         public static readonly DependencyProperty WatermarkProperty = DependencyProperty.Register("Watermark",
-            typeof(string), typeof(SearchControl), new PropertyMetadata("Поиск"));
+            typeof(string), typeof(SearchControl), new PropertyMetadata("Search"));
 
-        #endregion
-
+        #endregion Dependency properties
     }
 }

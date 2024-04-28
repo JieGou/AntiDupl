@@ -1,29 +1,32 @@
-﻿<Window x:Class="AntiDupl.NET.WPF.View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-        xmlns:behavior="clr-namespace:AntiDupl.NET.WPF.Behavior"
-        xmlns:control="clr-namespace:AntiDupl.NET.WPF.Control"
-        xmlns:convertor="clr-namespace:AntiDupl.NET.WPF.Convertor"
-        xmlns:objectModel="clr-namespace:AntiDupl.NET.WPF.ObjectModel"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d"
-        xmlns:viewModel="clr-namespace:AntiDupl.NET.WPF.ViewModel"
-        xmlns:helper="clr-namespace:AntiDupl.NET.WPF.Helper"
-        Title="{Binding Title, Mode=OneWay}"
-        Height="350" Width="625"
-        d:DataContext="{d:DesignInstance viewModel:MainViewModel, IsDesignTimeCreatable=False}"
-        UseLayoutRounding="True">
+﻿<Window
+    x:Class="AntiDupl.NET.WPF.View.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:behavior="clr-namespace:AntiDupl.NET.WPF.Behavior"
+    xmlns:control="clr-namespace:AntiDupl.NET.WPF.Control"
+    xmlns:convertor="clr-namespace:AntiDupl.NET.WPF.Convertor"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:helper="clr-namespace:AntiDupl.NET.WPF.Helper"
+    xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:objectModel="clr-namespace:AntiDupl.NET.WPF.ObjectModel"
+    xmlns:viewModel="clr-namespace:AntiDupl.NET.WPF.ViewModel"
+    Title="{Binding Title, Mode=OneWay}"
+    Width="625"
+    Height="350"
+    d:DataContext="{d:DesignInstance viewModel:MainViewModel,
+                                     IsDesignTimeCreatable=False}"
+    UseLayoutRounding="True"
+    mc:Ignorable="d">
     <Window.Resources>
-        <convertor:DuplResultMultiValueConverter x:Key="duplResultMultiValueConverter"/>
-        <convertor:FileSizeConverter x:Key="fileSizeConverter"/>
+        <convertor:DuplResultMultiValueConverter x:Key="duplResultMultiValueConverter" />
+        <convertor:FileSizeConverter x:Key="fileSizeConverter" />
         <convertor:FolderAreDiffrentMultuValueConverter x:Key="folderAreDiffrentMultuValueConverter" />
-        <convertor:ViewModeToVisibilityConverter x:Key="viewModeToVisibilityConverter"/>
-        <convertor:ListToBackgroundMultiValueConverter x:Key="listToBackgroundMultiValueConverter"/>
+        <convertor:ViewModeToVisibilityConverter x:Key="viewModeToVisibilityConverter" />
+        <convertor:ListToBackgroundMultiValueConverter x:Key="listToBackgroundMultiValueConverter" />
         <BooleanToVisibilityConverter x:Key="booleanToVisibilityConverter" />
-        <convertor:DeleteBackgroundValueConverter x:Key="deleteBackgroundValueConverter"/>
-        <convertor:DifferenceValueConverter x:Key="differenceValueConverter"/>
+        <convertor:DeleteBackgroundValueConverter x:Key="deleteBackgroundValueConverter" />
+        <convertor:DifferenceValueConverter x:Key="differenceValueConverter" />
 
         <Style TargetType="{x:Type Image}">
             <Setter Property="RenderOptions.BitmapScalingMode" Value="HighQuality" />
@@ -39,51 +42,47 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top">
             <Menu.Resources>
-                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource {x:Type Image}}">
+                <Style BasedOn="{StaticResource {x:Type Image}}" TargetType="{x:Type Image}">
                     <Setter Property="Height" Value="16" />
                     <Setter Property="Width" Value="16" />
                 </Style>
             </Menu.Resources>
             <MenuItem Header="{DynamicResource mainwindow_menu_file}">
-                <MenuItem Header="{DynamicResource mainwindow_menu_file_open_search_profile}"
-                          Command="{Binding LoadResultsCommand}">
+                <MenuItem Command="{Binding LoadResultsCommand}" Header="{DynamicResource mainwindow_menu_file_open_search_profile}">
                     <MenuItem.Icon>
                         <Image Source="../Image/img/ProfileOpenMenu.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource mainwindow_menu_file_save_search_profile_as}"
-                          Command="{Binding SaveResultsCommand}">
+                <MenuItem Command="{Binding SaveResultsCommand}" Header="{DynamicResource mainwindow_menu_file_save_search_profile_as}">
                     <MenuItem.Icon>
                         <Image Source="../Image/img/ProfileSaveAsMenu.png" />
                     </MenuItem.Icon>
                 </MenuItem>
                 <Separator />
-                <MenuItem Header="{DynamicResource mainwindow_menu_file_load_on_open}" 
-                          IsCheckable="True"
-                          IsChecked="{Binding Configuration.LoadResultOnOpen}"/>
-                <MenuItem Header="{DynamicResource mainwindow_menu_file_save_on_close}"
-                          IsCheckable="True"
-                          IsChecked="{Binding Configuration.SaveResultOnClose}"/>
+                <MenuItem
+                    Header="{DynamicResource mainwindow_menu_file_load_on_open}"
+                    IsCheckable="True"
+                    IsChecked="{Binding Configuration.LoadResultOnOpen}" />
+                <MenuItem
+                    Header="{DynamicResource mainwindow_menu_file_save_on_close}"
+                    IsCheckable="True"
+                    IsChecked="{Binding Configuration.SaveResultOnClose}" />
                 <Separator />
-                <MenuItem Header="{DynamicResource mainwindow_menu_file_exit}"
-                          Command="{Binding CloseCmd}" />
+                <MenuItem Command="{Binding CloseCmd}" Header="{DynamicResource mainwindow_menu_file_exit}" />
             </MenuItem>
 
             <MenuItem Header="{DynamicResource mainwindow_menu_edit}">
-                <MenuItem Header="{DynamicResource mainwindow_menu_edit_undo}"
-                          Command="{Binding UndoCommand}">
+                <MenuItem Command="{Binding UndoCommand}" Header="{DynamicResource mainwindow_menu_edit_undo}">
                     <MenuItem.Icon>
                         <Image Source="../Image/img/UndoMenu.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource mainwindow_menu_edit_undo_all}"
-                          Command="{Binding UndoAllCommand}">
+                <MenuItem Command="{Binding UndoAllCommand}" Header="{DynamicResource mainwindow_menu_edit_undo_all}">
                     <MenuItem.Icon>
                         <Image Source="../Image/img/UndoMenu.png" />
                     </MenuItem.Icon>
                 </MenuItem>
-                <MenuItem Header="{DynamicResource mainwindow_menu_edit_redo}"
-                          Command="{Binding RedoCommand}">
+                <MenuItem Command="{Binding RedoCommand}" Header="{DynamicResource mainwindow_menu_edit_redo}">
                     <MenuItem.Icon>
                         <Image Source="../Image/img/RedoMenu.png" />
                     </MenuItem.Icon>
@@ -99,24 +98,23 @@
                             <Setter Property="Header" Value="{Binding Title}" />
                             <Setter Property="IsCheckable" Value="True" />
 
-                            <Setter Property="IsChecked"
-                                    Value="{Binding Path=(viewModel:LanguageViewModel.IsChecked), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                            <Setter Property="Command"
-                                    Value="{Binding DataContext.LanguageSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}" />
-                            <Setter Property="CommandParameter"
-                                    Value="{Binding Path=(viewModel:LanguageViewModel.Enum)}" />
+                            <Setter Property="IsChecked" Value="{Binding Path=(viewModel:LanguageViewModel.IsChecked), Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                            <Setter Property="Command" Value="{Binding DataContext.LanguageSelectedCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type MenuItem}}}" />
+                            <Setter Property="CommandParameter" Value="{Binding Path=(viewModel:LanguageViewModel.Enum)}" />
                         </Style>
                     </MenuItem.ItemContainerStyle>
                 </MenuItem>
                 <MenuItem Header="{DynamicResource mainwindow_menu_view_mode}">
-                    <MenuItem x:Name="toGroup"
-                              Header="{DynamicResource mainwindow_menu_view_toGroup}"
-                              IsCheckable="true"
-                              Command="{Binding ConvertToGroupCommand}" />
-                    <MenuItem x:Name="toDuplPair"
-                              Header="{DynamicResource mainwindow_menu_view_toDuplPair}"
-                              IsCheckable="true"
-                              Command="{Binding ConvertToDuplPairCommand}" />
+                    <MenuItem
+                        x:Name="toGroup"
+                        Command="{Binding ConvertToGroupCommand}"
+                        Header="{DynamicResource mainwindow_menu_view_toGroup}"
+                        IsCheckable="true" />
+                    <MenuItem
+                        x:Name="toDuplPair"
+                        Command="{Binding ConvertToDuplPairCommand}"
+                        Header="{DynamicResource mainwindow_menu_view_toDuplPair}"
+                        IsCheckable="true" />
                     <Separator />
 
                     <i:Interaction.Behaviors>
@@ -128,18 +126,17 @@
 
         <ToolBar DockPanel.Dock="Top">
             <ToolBar.Resources>
-                <Style TargetType="{x:Type Image}" BasedOn="{StaticResource {x:Type Image}}">
+                <Style BasedOn="{StaticResource {x:Type Image}}" TargetType="{x:Type Image}">
                     <Setter Property="Height" Value="32" />
                     <Setter Property="Width" Value="32" />
                 </Style>
             </ToolBar.Resources>
-            <Button Command="{Binding UndoCommand}"
-                    ToolTip="{Binding UndoTooltip, Mode=OneWay}">
+            <Button Command="{Binding UndoCommand}" ToolTip="{Binding UndoTooltip, Mode=OneWay}">
                 <Image Source="../Image/undo-3-32.png" />
             </Button>
             <Menu Height="26" HorizontalContentAlignment="Center">
                 <MenuItem Header="Menu">
-                    <MenuItem Header="Undo all" Command="{Binding UndoAllCommand}" />
+                    <MenuItem Command="{Binding UndoAllCommand}" Header="Undo all" />
                 </MenuItem>
             </Menu>
             <Button Command="{Binding RedoCommand}">
@@ -151,28 +148,26 @@
             </Button>
             <Menu>
                 <MenuItem Header="Tuning">
-                    <MenuItem Header="{DynamicResource toolBar_setSaati}"
-                              Command="{Binding SetPrioritiesCommand}" />
-                    <MenuItem Header="Calculate histogram peaks for DCT coefficient"
-                              Command="{Binding CalculateHistogramPeaksCommand}" />
+                    <MenuItem Command="{Binding SetPrioritiesCommand}" Header="{DynamicResource toolBar_setSaati}" />
+                    <MenuItem Command="{Binding CalculateHistogramPeaksCommand}" Header="Calculate histogram peaks for DCT coefficient" />
                 </MenuItem>
             </Menu>
-            
+
             <Separator />
             <Button Command="{Binding OpenPathCommand}" ToolTip="Path">
                 <Image Source="../Image/img/PathsButton.png" />
             </Button>
-            <Button ToolTip="Search" Command="{Binding SearchCommand}">
+            <Button Command="{Binding SearchCommand}" ToolTip="Search">
                 <Image Source="../Image/img/StartButton.png" />
             </Button>
-            <Button Content="Configurable action" Command="{Binding ConfigurableActionCommand}" />
+            <Button Command="{Binding ConfigurableActionCommand}" Content="Configurable action" />
 
-            <Button ToolTip="Refresh" Command="{Binding RefreshCommand}">
+            <Button Command="{Binding RefreshCommand}" ToolTip="Refresh">
                 <Image Source="../Image/img/RefreshButton.png" />
             </Button>
         </ToolBar>
 
-        <StatusBar DockPanel.Dock="Bottom" >
+        <StatusBar DockPanel.Dock="Bottom">
             <StatusBar.ItemsPanel>
                 <ItemsPanelTemplate>
                     <DockPanel LastChildFill="False" />
@@ -184,55 +179,47 @@
             </StatusBarItem>
             <Separator DockPanel.Dock="Left" />
             <StatusBarItem DockPanel.Dock="Left">
-                <TextBlock Text="{Binding CacheStatus, Mode=OneWay}"/>
+                <TextBlock Text="{Binding CacheStatus, Mode=OneWay}" />
             </StatusBarItem>
-
             <StatusBarItem DockPanel.Dock="Right">
                 <TextBlock Text="{Binding Version, Mode=OneWay}" />
             </StatusBarItem>
         </StatusBar>
 
-        <FrameworkElement x:Name="dummyElement" Visibility="Collapsed"/>
+        <FrameworkElement x:Name="dummyElement" Visibility="Collapsed" />
 
-        <TabControl SelectedIndex="{Binding SelectedTabPageIndex, 
-                                            Mode=TwoWay,
-                                            UpdateSourceTrigger=PropertyChanged}" >
+        <TabControl SelectedIndex="{Binding SelectedTabPageIndex, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
-            <TabItem Header="{DynamicResource mainwindow_tabControl_duplPair}" 
-                     Visibility="{Binding ViewModeModel.ViewMode, 
-                Converter={StaticResource viewModeToVisibilityConverter}, 
-                ConverterParameter={x:Static objectModel:ViewMode.Pair}}">
-
+            <TabItem Header="{DynamicResource mainwindow_tabControl_duplPair}" Visibility="{Binding ViewModeModel.ViewMode, Converter={StaticResource viewModeToVisibilityConverter}, ConverterParameter={x:Static objectModel:ViewMode.Pair}}">
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
 
-                    <control:SearchControl SearchCommand="{Binding FilterResultCommand}"
-                                           ClearCommand="{Binding ClearFilterResultCommand}" 
-                                           Margin="2"
-                                           Grid.Row="0"/>
+                    <control:SearchControl
+                        Grid.Row="0"
+                        Margin="2"
+                        ClearCommand="{Binding ClearFilterResultCommand}"
+                        SearchCommand="{Binding FilterResultCommand}" />
 
-
-                    <DataGrid Grid.Row="1"
-                        ItemsSource="{Binding Result}" 
-                  AutoGenerateColumns="False"
-                  CanUserAddRows="False"
-                  IsSynchronizedWithCurrentItem="True"
-                        helper:DataGridColumnChooserHelper.IsEnabled="True">
-                        <!--SelectedIndex="{Binding SelectedResultIndex}"-->
+                    <DataGrid
+                        Grid.Row="1"
+                        helper:DataGridColumnChooserHelper.IsEnabled="True"
+                        AutoGenerateColumns="False"
+                        CanUserAddRows="False"
+                        IsSynchronizedWithCurrentItem="True"
+                        ItemsSource="{Binding Result}">
+                        <!--  SelectedIndex="{Binding SelectedResultIndex}"  -->
                         <i:Interaction.Behaviors>
-                            <behavior:DataGridContextMenuItemSourceBindingOnOpenBehavior 
-                                   MenuGeneratorDuplPair="{Binding MenuGeneratorDuplPair}"
-                                   MenuGeneratorMultiDuplPair="{Binding MenuGeneratorMultiDuplPair}" />
+                            <behavior:DataGridContextMenuItemSourceBindingOnOpenBehavior MenuGeneratorDuplPair="{Binding MenuGeneratorDuplPair}" MenuGeneratorMultiDuplPair="{Binding MenuGeneratorMultiDuplPair}" />
                             <!--<CollectionContainer
                                 Collection="{Binding Source={StaticResource GreekGodsData}}" />-->
                             <behavior:DataGridScrollIntoViewBehavior />
                         </i:Interaction.Behaviors>
 
                         <DataGrid.ContextMenu>
-                            <ContextMenu >
+                            <ContextMenu>
                                 <ContextMenu.ItemContainerStyle>
                                     <Style TargetType="{x:Type MenuItem}">
                                         <Setter Property="Command" Value="{Binding Command}" />
@@ -243,59 +230,65 @@
 
                                 <!--<MenuItem Header="Show diffrence in percent"
                                  Command="{Binding DataContext.ShowDiffrenceInPercent, Source={x:Reference dummyElement}}"
-                                    CommandParameter="{Binding Result/}"/>-->
+                                    CommandParameter="{Binding Result/}" />-->
                             </ContextMenu>
                         </DataGrid.ContextMenu>
 
                         <DataGrid.Columns>
-                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_tabControl_duplPair_ignore}" >
+                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_tabControl_duplPair_ignore}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button ToolTip="{DynamicResource mainwindow_tabControl_duplPair_ignore}" 
-                                    Command="{Binding DataContext.ExecuteIgnorePairCommand, Source={x:Reference dummyElement}}"
-                                    CommandParameter="{Binding}" >
-                                            <Image Source ="/AntiDupl.NET.WPF;component/Image/MistakeButton.png" MaxHeight="24" />
+                                        <Button
+                                            Command="{Binding DataContext.ExecuteIgnorePairCommand, Source={x:Reference dummyElement}}"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="{DynamicResource mainwindow_tabControl_duplPair_ignore}">
+                                            <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MistakeButton.png" />
                                         </Button>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_GridColumn_Image}" 
-                                                Width="{Binding ThumbnailColumnWidth}">
+                            <DataGridTemplateColumn Width="{Binding ThumbnailColumnWidth}" Header="{DynamicResource mainwindow_GridColumn_Image}">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition/>
-                                                <ColumnDefinition/>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition />
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
-                                            <Image Grid.Column="0" Source="{Binding FirstFile.Image}" 
-                                            Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
-                                            Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
-                                            Stretch="Uniform"
-                                            ToolTip="{Binding FirstFile.Path}">
-                                                <!--RenderOptions.BitmapScalingMode="HighQuality"-->
+                                            <Image
+                                                Grid.Column="0"
+                                                Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
+                                                Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
+                                                Source="{Binding FirstFile.Image}"
+                                                Stretch="Uniform"
+                                                ToolTip="{Binding FirstFile.Path}">
+                                                <!--  RenderOptions.BitmapScalingMode="HighQuality"  -->
                                                 <Image.InputBindings>
-                                                    <MouseBinding MouseAction="LeftDoubleClick"
-                                                    Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
-                                                    CommandParameter="{Binding FirstFile.Path}" />
+                                                    <MouseBinding
+                                                        Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
+                                                        CommandParameter="{Binding FirstFile.Path}"
+                                                        MouseAction="LeftDoubleClick" />
                                                 </Image.InputBindings>
                                                 <i:Interaction.Behaviors>
                                                     <behavior:ImagePropertyBehavior />
                                                 </i:Interaction.Behaviors>
                                             </Image>
-                                            <Image Grid.Column="1" Source="{Binding SecondFile.Image}"
-                                            Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
-                                            Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
-                                            Stretch="Uniform"
-                                            ToolTip="{Binding SecondFile.Path}" >
+                                            <Image
+                                                Grid.Column="1"
+                                                Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
+                                                Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
+                                                Source="{Binding SecondFile.Image}"
+                                                Stretch="Uniform"
+                                                ToolTip="{Binding SecondFile.Path}">
                                                 <Image.InputBindings>
-                                                    <MouseBinding MouseAction="LeftDoubleClick"
-                                                    Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
-                                                    CommandParameter="{Binding SecondFile.Path}" />
+                                                    <MouseBinding
+                                                        Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
+                                                        CommandParameter="{Binding SecondFile.Path}"
+                                                        MouseAction="LeftDoubleClick" />
                                                 </Image.InputBindings>
                                             </Image>
                                         </Grid>
@@ -306,47 +299,52 @@
                             <DataGridTemplateColumn Header="Difference">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Difference, Mode=OneWay, StringFormat={}{0:F3}}"
-                                           VerticalAlignment="Center"
-                                           Background="{Binding Difference, Converter={StaticResource differenceValueConverter}}" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            Background="{Binding Difference, Converter={StaticResource differenceValueConverter}}"
+                                            Text="{Binding Difference, Mode=OneWay, StringFormat={}{0:F3}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTextColumn Binding="{Binding Transform, Mode=OneWay}"
-                            Header="Transform"
-                            IsReadOnly="True" ElementStyle="{StaticResource VerticalAlignmentCenter}" />
+                            <DataGridTextColumn
+                                Binding="{Binding Transform, Mode=OneWay}"
+                                ElementStyle="{StaticResource VerticalAlignmentCenter}"
+                                Header="Transform"
+                                IsReadOnly="True" />
 
-                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_GridColumn_ImageInfo}" >
+                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_GridColumn_ImageInfo}" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Grid >
+                                        <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <!--Directory-->
-                                                <ColumnDefinition Width="Auto"/>
-                                                <!--FileName-->
-                                                <ColumnDefinition Width="Auto"/>
-                                                <!--FileSize-->
+                                                <!--  Directory  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Resolution-->
+                                                <!--  FileName  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Blockiness-->
+                                                <!--  FileSize  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Bluring-->
+                                                <!--  Resolution  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--JpegPeaks-->
+                                                <!--  Blockiness  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--UtilityIndex-->
-                                                <ColumnDefinition Width="*"/>
+                                                <!--  Bluring  -->
+                                                <ColumnDefinition Width="Auto" />
+                                                <!--  JpegPeaks  -->
+                                                <ColumnDefinition Width="Auto" />
+                                                <!--  UtilityIndex  -->
+                                                <ColumnDefinition Width="*" />
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
                                                 <RowDefinition />
                                             </Grid.RowDefinitions>
 
-                                            <TextBox Grid.Row="0" Grid.Column="0"
-                                        Text="{Binding FirstFile.Directory, Mode=OneWay}" 
-                                        IsReadOnly="True" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Directory, Mode=OneWay}">
                                                 <TextBox.Style>
                                                     <Style TargetType="{x:Type TextBox}">
                                                         <Setter Property="Grid.RowSpan" Value="1" />
@@ -361,284 +359,364 @@
                                                 </TextBox.Style>
                                             </TextBox>
 
-                                            <TextBox Grid.Row="1" Grid.Column="0"
-                                        Text="{Binding SecondFile.Directory, Mode=OneWay}" 
-                                        IsReadOnly="True"
-                                        VerticalAlignment="Top" 
-                                    Visibility="{Binding FolderAreDiffrent, 
-                                Converter={StaticResource booleanToVisibilityConverter}}"/>
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Directory, Mode=OneWay}"
+                                                Visibility="{Binding FolderAreDiffrent, Converter={StaticResource booleanToVisibilityConverter}}" />
 
                                             <!--<TextBox Grid.Row="0" Grid.Column="3"
-                                    Text="{Binding FirstFile.FileName, Mode=OneWay}" 
+                                    Text="{Binding FirstFile.FileName, Mode=OneWay}"
                                     IsReadOnly="True"
                                     VerticalAlignment="Bottom" />
 
                                 <TextBox Grid.Row="1" Grid.Column="3"
-                                    Text="{Binding SecondFile.FileName, Mode=OneWay}" 
+                                    Text="{Binding SecondFile.FileName, Mode=OneWay}"
                                     IsReadOnly="True"
                                     VerticalAlignment="Top" />-->
 
-                                            <control:RenameImageTextBox Grid.Row="0" Grid.Column="1"
-                                                                VerticalAlignment="Bottom"
-                                                                ImageInfo="{Binding FirstFile}"
-                                                                EnableEdit="True"
-                                                                ShowFullPath="False" >
-                                            </control:RenameImageTextBox>
+                                            <control:RenameImageTextBox
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Bottom"
+                                                EnableEdit="True"
+                                                ImageInfo="{Binding FirstFile}"
+                                                ShowFullPath="False" />
 
-                                            <control:RenameImageTextBox Grid.Row="1" Grid.Column="1"
-                                                                     VerticalAlignment="Top"
-                                                                     ImageInfo="{Binding SecondFile}"
-                                                                     EnableEdit="True"
-                                                                     ShowFullPath="False" >
-                                            </control:RenameImageTextBox>
+                                            <control:RenameImageTextBox
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Top"
+                                                EnableEdit="True"
+                                                ImageInfo="{Binding SecondFile}"
+                                                ShowFullPath="False" />
 
-                                            <TextBox  Grid.Row="0" Grid.Column="2"
-                                                  Text="{Binding FirstFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}" 
-                                                  IsReadOnly="True"
-                                                  ToolTip="{DynamicResource mainwindow_tooltip_FileSize}" 
-                                                  VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_FileSize}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.FileSize}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.FileSize}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="1" Grid.Column="2"
-                                                      Text="{Binding SecondFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{DynamicResource mainwindow_tooltip_FileSize}" 
-                                                      VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_FileSize}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.FileSize}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.FileSize}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="0" Grid.Column="3"
-                                                  Text="{Binding FirstFile.Resolution, Mode=OneWay}" 
-                                                  IsReadOnly="True"
-                                                  ToolTip="{DynamicResource mainwindow_tooltip_Resolution}" 
-                                                  VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Resolution, Mode=OneWay}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_Resolution}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Resolution}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Resolution}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1" Grid.Column="3"
-                                                 Text="{Binding SecondFile.Resolution, Mode=OneWay}" 
-                                                 IsReadOnly="True"
-                                                 ToolTip="{DynamicResource mainwindow_tooltip_Resolution}" 
-                                                 VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Resolution, Mode=OneWay}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_Resolution}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Resolution}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Resolution}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox Grid.Row="0"  Grid.Column="4"
-                                                 Text="{Binding FirstFile.Blockiness, Mode=OneWay, StringFormat=G3}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Bottom">
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="4"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Blockiness, Mode=OneWay, StringFormat=G3}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                        <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}"/>
-                                                        <Run Text=":" />
-                                                        <Run Text="{Binding FirstFile.Blockiness, Mode=OneWay}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}" />
+                                                            <Run Text=":" />
+                                                            <Run Text="{Binding FirstFile.Blockiness, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1"  Grid.Column="4"
-                                                 Text="{Binding SecondFile.Blockiness, Mode=OneWay, StringFormat=G3}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Top">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="4"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Blockiness, Mode=OneWay, StringFormat=G3}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                        <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}"/>
-                                                        <Run Text=":" />
-                                                        <Run Text="{Binding SecondFile.Blockiness, Mode=OneWay}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}" />
+                                                            <Run Text=":" />
+                                                            <Run Text="{Binding SecondFile.Blockiness, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox Grid.Row="0" Grid.Column="5"
-                                                 Text="{Binding FirstFile.Bluring, Mode=OneWay, StringFormat=G3}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="5"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Bluring, Mode=OneWay, StringFormat=G3}">
                                                 <TextBox.ToolTip>
                                                     <TextBlock>
-                                                        <Run Text="{DynamicResource mainwindow_tooltip_Bluring}"/>
+                                                        <Run Text="{DynamicResource mainwindow_tooltip_Bluring}" />
                                                         <Run Text=":" />
-                                                        <Run Text="{Binding FirstFile.Bluring, Mode=OneWay}"/>
+                                                        <Run Text="{Binding FirstFile.Bluring, Mode=OneWay}" />
                                                     </TextBlock>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Bluring}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Bluring}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1" Grid.Column="5"
-                                                 Text="{Binding SecondFile.Bluring, Mode=OneWay, StringFormat=G2}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="5"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Bluring, Mode=OneWay, StringFormat=G2}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                        <Run Text="{DynamicResource mainwindow_tooltip_Bluring}"/>
-                                                        <Run Text=":" />
-                                                        <Run Text="{Binding SecondFile.Bluring, Mode=OneWay}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Bluring}" />
+                                                            <Run Text=":" />
+                                                            <Run Text="{Binding SecondFile.Bluring, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Bluring}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Bluring}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox Grid.Row="0" Grid.Column="6"
-                                                 Text="{Binding FirstFile.JpegPeaks, Mode=OneWay}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Bottom" 
-                                                     ToolTip="JpegPeaks">
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="6"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.JpegPeaks, Mode=OneWay}"
+                                                ToolTip="JpegPeaks">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.JpegPeaks}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.JpegPeaks}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1" Grid.Column="6"
-                                                 Text="{Binding SecondFile.JpegPeaks, Mode=OneWay}" 
-                                                 IsReadOnly="True"
-                                                 VerticalAlignment="Top"
-                                                     ToolTip="JpegPeaks">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="6"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.JpegPeaks, Mode=OneWay}"
+                                                ToolTip="JpegPeaks">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.JpegPeaks}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.JpegPeaks}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox Grid.Row="0" Grid.Column="7"
-                                                 Text="{Binding FirstFile.UtilityIndex, Mode=OneWay, StringFormat=G3}" 
-                                                 IsReadOnly="True"
-                                                 ToolTip="{Binding FirstFile.UtilityIndexCalculateDecription, Mode=OneWay}"
-                                                 VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="7"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.UtilityIndex, Mode=OneWay, StringFormat=G3}"
+                                                ToolTip="{Binding FirstFile.UtilityIndexCalculateDecription, Mode=OneWay}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="FirstFile.UtilityIndex"/>
-                                                        <!--для обновления биндинга-->
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding Path="FirstFile.UtilityIndex" />
+                                                        <!--  для обновления биндинга  -->
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1" Grid.Column="7"
-                                                 Text="{Binding SecondFile.UtilityIndex, Mode=OneWay, StringFormat=G3}"
-                                                 IsReadOnly="True"
-                                                 ToolTip="{Binding SecondFile.UtilityIndexCalculateDecription, Mode=OneWay}" 
-                                                 VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="7"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.UtilityIndex, Mode=OneWay, StringFormat=G3}"
+                                                ToolTip="{Binding SecondFile.UtilityIndexCalculateDecription, Mode=OneWay}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
                                                         <Binding Mode="OneWay" UpdateSourceTrigger="PropertyChanged" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="SecondFile.UtilityIndex"/>
-                                                        <!--для обновления биндинга-->
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding Path="SecondFile.UtilityIndex" />
+                                                        <!--  для обновления биндинга  -->
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
                                         </Grid>
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
-
                             </DataGridTemplateColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
-
                 </Grid>
             </TabItem>
 
-            <TabItem Header="{DynamicResource mainwindow_tabControl_DuplGroups}" 
-                     Visibility="{Binding ViewModeModel.ViewMode, 
-                     Converter={StaticResource viewModeToVisibilityConverter}, 
-                        ConverterParameter={x:Static objectModel:ViewMode.Group}}" >
-                <DataGrid ItemsSource="{Binding GroupsCollection}" 
-                      AutoGenerateColumns="False"
-                      IsSynchronizedWithCurrentItem="True" 
-                      Style="{StaticResource DataGridAlternation}">
+            <TabItem Header="{DynamicResource mainwindow_tabControl_DuplGroups}" Visibility="{Binding ViewModeModel.ViewMode, Converter={StaticResource viewModeToVisibilityConverter}, ConverterParameter={x:Static objectModel:ViewMode.Group}}">
+                <DataGrid
+                    AutoGenerateColumns="False"
+                    IsSynchronizedWithCurrentItem="True"
+                    ItemsSource="{Binding GroupsCollection}"
+                    Style="{StaticResource DataGridAlternation}">
                     <i:Interaction.Behaviors>
-                        <behavior:DataGridContextMenuItemSourceBindingOnOpenBehavior 
-                            MenuGeneratorDuplGroup="{Binding MenuGeneratorDuplGroup}" 
-                            MenuGeneratorMultiDuplGroup="{Binding MenuGeneratorMultiDuplGroup}"/>
+                        <behavior:DataGridContextMenuItemSourceBindingOnOpenBehavior MenuGeneratorDuplGroup="{Binding MenuGeneratorDuplGroup}" MenuGeneratorMultiDuplGroup="{Binding MenuGeneratorMultiDuplGroup}" />
                     </i:Interaction.Behaviors>
                     <DataGrid.ContextMenu>
-                        <ContextMenu >
+                        <ContextMenu>
                             <ContextMenu.ItemContainerStyle>
                                 <Style TargetType="{x:Type MenuItem}">
                                     <Setter Property="Command" Value="{Binding Command}" />
@@ -649,125 +727,153 @@
                         </ContextMenu>
                     </DataGrid.ContextMenu>
                     <DataGrid.Columns>
-                        <DataGridTemplateColumn Header="Image" MinWidth="150"
-                                                Width="*">
+                        <DataGridTemplateColumn
+                            Width="*"
+                            MinWidth="150"
+                            Header="Image">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <ListView ItemsSource="{Binding FileList}" 
-                                              ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                                              Style="{StaticResource BackgroundControlAlternation}">
+                                    <ListView
+                                        ItemsSource="{Binding FileList}"
+                                        ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                        Style="{StaticResource BackgroundControlAlternation}">
                                         <ListView.ItemsPanel>
                                             <ItemsPanelTemplate>
-                                                <WrapPanel Width="{Binding (FrameworkElement.ActualWidth), 
-                                                    RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
-                                                    ItemWidth="{Binding (ListView.View).ItemWidth, 
-                                                    RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                    ItemHeight="{Binding (ListView.View).ItemHeight, 
-                                                    RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                <WrapPanel
+                                                    Width="{Binding (FrameworkElement.ActualWidth), RelativeSource={RelativeSource AncestorType=ScrollContentPresenter}}"
+                                                    ItemHeight="{Binding (ListView.View).ItemHeight, RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                    ItemWidth="{Binding (ListView.View).ItemWidth, RelativeSource={RelativeSource AncestorType=ListView}}" />
                                             </ItemsPanelTemplate>
                                         </ListView.ItemsPanel>
                                         <ListBox.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel Orientation="Vertical" 
-                                                            Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}">
-                                                    <Image Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
-                                                           Source="{Binding Image, Mode=OneWay}" 
-                                                           Stretch="Uniform" >
+                                                <StackPanel Width="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}" Orientation="Vertical">
+                                                    <Image
+                                                        Height="{Binding DataContext.ThumbnailWidth, Source={x:Reference dummyElement}}"
+                                                        Source="{Binding Image, Mode=OneWay}"
+                                                        Stretch="Uniform">
                                                         <Image.InputBindings>
-                                                            <MouseBinding MouseAction="LeftDoubleClick"
-                                                              Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
-                                                              CommandParameter="{Binding Path}" />
+                                                            <MouseBinding
+                                                                Command="{Binding DataContext.OpenImageCommand, Source={x:Reference dummyElement}}"
+                                                                CommandParameter="{Binding Path}"
+                                                                MouseAction="LeftDoubleClick" />
                                                         </Image.InputBindings>
                                                     </Image>
-                                                    <TextBox Text="{Binding Path, Mode=OneWay}" 
-                                                             ToolTip="{Binding Path, Mode=OneWay}" 
-                                                             IsReadOnly="True"  />
-                                                    <StackPanel Orientation="Horizontal" >
-                                                        <TextBox Text="{Binding FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
-                                                                 IsReadOnly="True" 
-                                                                 ToolTip="{DynamicResource mainwindow_tooltip_FileSize}" >
+                                                    <TextBox
+                                                        IsReadOnly="True"
+                                                        Text="{Binding Path, Mode=OneWay}"
+                                                        ToolTip="{Binding Path, Mode=OneWay}" />
+                                                    <StackPanel Orientation="Horizontal">
+                                                        <TextBox
+                                                            IsReadOnly="True"
+                                                            Text="{Binding FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
+                                                            ToolTip="{DynamicResource mainwindow_tooltip_FileSize}">
                                                             <TextBox.Background>
-                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" 
-                                                                              ConverterParameter="{x:Static convertor:MaxProperty.FileSize}" >
-                                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" Path="ItemsSource"/>
-                                                                    <Binding Path="FileSize" Mode="OneWay" />
-                                                                    <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.FileSize}">
+                                                                    <Binding Path="ItemsSource" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" />
+                                                                    <Binding Mode="OneWay" Path="FileSize" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.GoodColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.BadColor"
+                                                                        Source="{x:Reference dummyElement}" />
                                                                 </MultiBinding>
                                                             </TextBox.Background>
                                                         </TextBox>
-                                                        <TextBox Text="{Binding Resolution, Mode=OneWay}" 
-                                                                 IsReadOnly="True" 
-                                                                 ToolTip="{DynamicResource mainwindow_tooltip_Resolution}" >
+                                                        <TextBox
+                                                            IsReadOnly="True"
+                                                            Text="{Binding Resolution, Mode=OneWay}"
+                                                            ToolTip="{DynamicResource mainwindow_tooltip_Resolution}">
                                                             <TextBox.Background>
-                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" 
-                                                                              ConverterParameter="{x:Static convertor:MaxProperty.Resolution}" >
-                                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" Path="ItemsSource"/>
-                                                                    <Binding Path="Width" Mode="OneWay" />
-                                                                    <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="Height" Mode="OneWay" />
+                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Resolution}">
+                                                                    <Binding Path="ItemsSource" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" />
+                                                                    <Binding Mode="OneWay" Path="Width" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.GoodColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.BadColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding Mode="OneWay" Path="Height" />
                                                                 </MultiBinding>
                                                             </TextBox.Background>
                                                         </TextBox>
-                                                        <TextBox Text="{Binding Blockiness, Mode=OneWay, StringFormat=G3}" 
-                                                                 IsReadOnly="True" >
+                                                        <TextBox IsReadOnly="True" Text="{Binding Blockiness, Mode=OneWay, StringFormat=G3}">
                                                             <TextBox.ToolTip>
                                                                 <ToolTip>
                                                                     <TextBlock>
-                                                                        <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}"/>
+                                                                        <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}" />
                                                                         <Run Text=":" />
-                                                                        <Run Text="{Binding Blockiness, Mode=OneWay}"/>
+                                                                        <Run Text="{Binding Blockiness, Mode=OneWay}" />
                                                                     </TextBlock>
                                                                 </ToolTip>
                                                             </TextBox.ToolTip>
                                                             <TextBox.Background>
-                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" 
-                                                                              ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}" >
-                                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" Path="ItemsSource"/>
-                                                                    <Binding Path="Blockiness" Mode="OneWay" />
-                                                                    <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}">
+                                                                    <Binding Path="ItemsSource" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" />
+                                                                    <Binding Mode="OneWay" Path="Blockiness" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.GoodColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.BadColor"
+                                                                        Source="{x:Reference dummyElement}" />
                                                                 </MultiBinding>
                                                             </TextBox.Background>
                                                         </TextBox>
-                                                        <TextBox Text="{Binding Bluring, Mode=OneWay, StringFormat=G2}" 
-                                                                 IsReadOnly="True" >
+                                                        <TextBox IsReadOnly="True" Text="{Binding Bluring, Mode=OneWay, StringFormat=G2}">
                                                             <TextBox.ToolTip>
                                                                 <ToolTip>
                                                                     <TextBlock>
-                                                                        <Run Text="{DynamicResource mainwindow_tooltip_Bluring}"/>
+                                                                        <Run Text="{DynamicResource mainwindow_tooltip_Bluring}" />
                                                                         <Run Text=":" />
-                                                                        <Run Text="{Binding Bluring, Mode=OneWay}"/>
+                                                                        <Run Text="{Binding Bluring, Mode=OneWay}" />
                                                                     </TextBlock>
                                                                 </ToolTip>
                                                             </TextBox.ToolTip>
                                                             <TextBox.Background>
-                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" 
-                                                                              ConverterParameter="{x:Static convertor:MaxProperty.Bluring}" >
-                                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" Path="ItemsSource"/>
-                                                                    <Binding Path="Bluring" Mode="OneWay" />
-                                                                    <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Bluring}">
+                                                                    <Binding Path="ItemsSource" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" />
+                                                                    <Binding Mode="OneWay" Path="Bluring" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.GoodColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.BadColor"
+                                                                        Source="{x:Reference dummyElement}" />
                                                                 </MultiBinding>
                                                             </TextBox.Background>
                                                         </TextBox>
 
-                                                        <TextBox Text="{Binding UtilityIndex, Mode=OneWay, StringFormat=G3}" 
-                                                                 IsReadOnly="True" 
-                                                                 ToolTip="{Binding UtilityIndexCalculateDecription, Mode=OneWay}"
-                                                                 Width="30">
+                                                        <TextBox
+                                                            Width="30"
+                                                            IsReadOnly="True"
+                                                            Text="{Binding UtilityIndex, Mode=OneWay, StringFormat=G3}"
+                                                            ToolTip="{Binding UtilityIndexCalculateDecription, Mode=OneWay}">
                                                             <TextBox.Background>
-                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" 
-                                                                              ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
-                                                                    <Binding RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" Path="ItemsSource"/>
-                                                                    <Binding Path="UtilityIndex" Mode="OneWay" />
-                                                                    <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                                    <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                                <MultiBinding Converter="{StaticResource listToBackgroundMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
+                                                                    <Binding Path="ItemsSource" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type ListView}}" />
+                                                                    <Binding Mode="OneWay" Path="UtilityIndex" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.GoodColor"
+                                                                        Source="{x:Reference dummyElement}" />
+                                                                    <Binding
+                                                                        Mode="OneWay"
+                                                                        Path="DataContext.Configuration.BadColor"
+                                                                        Source="{x:Reference dummyElement}" />
                                                                 </MultiBinding>
                                                             </TextBox.Background>
                                                         </TextBox>
-
                                                     </StackPanel>
                                                 </StackPanel>
                                             </DataTemplate>
@@ -776,205 +882,218 @@
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
                 </DataGrid>
             </TabItem>
 
-            <TabItem Header="{DynamicResource mainwindow_tabControl_CompareMode}" 
-                     Visibility="{Binding ViewModeModel.ViewMode, 
-                Converter={StaticResource viewModeToVisibilityConverter}, ConverterParameter={x:Static objectModel:ViewMode.Pair}}">
-                <Grid >
+            <TabItem Header="{DynamicResource mainwindow_tabControl_CompareMode}" Visibility="{Binding ViewModeModel.ViewMode, Converter={StaticResource viewModeToVisibilityConverter}, ConverterParameter={x:Static objectModel:ViewMode.Pair}}">
+                <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition />
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
-                        <!--Images-->
+                        <!--  Images  -->
                         <ColumnDefinition Width="Auto" />
-                        <!--GridSplitter-->
+                        <!--  GridSplitter  -->
                         <ColumnDefinition />
-                        <!--DataGrid-->
+                        <!--  DataGrid  -->
                     </Grid.ColumnDefinitions>
 
                     <Grid Grid.Column="0">
                         <Grid.RowDefinitions>
                             <RowDefinition />
-                            <RowDefinition Height="Auto"/>
-                            <!--Separator-->
+                            <RowDefinition Height="Auto" />
+                            <!--  Separator  -->
                             <RowDefinition />
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="0.25*"/>
-                            <ColumnDefinition Width="0.5*"/>
-                            <ColumnDefinition Width="0.25*"/>
+                            <ColumnDefinition Width="0.25*" />
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="0.25*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Separator Grid.Row="1" Grid.ColumnSpan="3"/>
+                        <Separator Grid.Row="1" Grid.ColumnSpan="3" />
 
-                        <control:ImageInfoControl Grid.Row="0" Grid.Column="0"
-                                                   MainImage="{Binding Result/PreviosFirstFile}" 
-                                                   EnableInfo="False" />
-                        <control:ImageInfoControl Grid.Row="0" Grid.Column="1"
-                                            MainImage="{Binding Result/FirstFile}"
-                                            AdditionalImage="{Binding Result/SecondFile}"
-                                            GoodColor="{Binding Configuration.GoodColor, Mode=OneWay}" 
-                                            BadColor="{Binding Configuration.BadColor, Mode=OneWay}" 
-                                            OpenComparatorForDuplPairCommand="{Binding OpenComparatorForDuplPairCommand, Mode=OneWay}"
-                                            ShowFullImage="True">
-                        </control:ImageInfoControl>
+                        <control:ImageInfoControl
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            EnableInfo="False"
+                            MainImage="{Binding Result/PreviosFirstFile}" />
+                        <control:ImageInfoControl
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            AdditionalImage="{Binding Result/SecondFile}"
+                            BadColor="{Binding Configuration.BadColor, Mode=OneWay}"
+                            GoodColor="{Binding Configuration.GoodColor, Mode=OneWay}"
+                            MainImage="{Binding Result/FirstFile}"
+                            OpenComparatorForDuplPairCommand="{Binding OpenComparatorForDuplPairCommand, Mode=OneWay}"
+                            ShowFullImage="True" />
 
-                        <control:ImageInfoControl Grid.Row="0" Grid.Column="2"
-                                                   MainImage="{Binding Result/AfterFirstFile}" 
-                                                   EnableInfo="False"/>
+                        <control:ImageInfoControl
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            EnableInfo="False"
+                            MainImage="{Binding Result/AfterFirstFile}" />
 
-                        <control:ImageInfoControl Grid.Row="2" Grid.Column="0"
-                                                   MainImage="{Binding Result/PreviosSecondFile}" 
-                                                   EnableInfo="False"/>
-                        <control:ImageInfoControl Grid.Row="2" Grid.Column="1"
-                                                   MainImage="{Binding Result/SecondFile}"
-                                                   AdditionalImage="{Binding Result/FirstFile}"
-                                                   GoodColor="{Binding Configuration.GoodColor, Mode=OneWay}" 
-                                                   BadColor="{Binding Configuration.BadColor, Mode=OneWay}" 
-                                                   ShowFullImage="True"/>
-                        <control:ImageInfoControl Grid.Row="2" Grid.Column="2"
-                                                   MainImage="{Binding Result/AfterSecondFile}" 
-                                                   EnableInfo="False" />
+                        <control:ImageInfoControl
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            EnableInfo="False"
+                            MainImage="{Binding Result/PreviosSecondFile}" />
+                        <control:ImageInfoControl
+                            Grid.Row="2"
+                            Grid.Column="1"
+                            AdditionalImage="{Binding Result/FirstFile}"
+                            BadColor="{Binding Configuration.BadColor, Mode=OneWay}"
+                            GoodColor="{Binding Configuration.GoodColor, Mode=OneWay}"
+                            MainImage="{Binding Result/SecondFile}"
+                            ShowFullImage="True" />
+                        <control:ImageInfoControl
+                            Grid.Row="2"
+                            Grid.Column="2"
+                            EnableInfo="False"
+                            MainImage="{Binding Result/AfterSecondFile}" />
 
-                        <Grid Grid.Row="0" Grid.Column="3" Grid.RowSpan="3">
+                        <Grid
+                            Grid.Row="0"
+                            Grid.RowSpan="3"
+                            Grid.Column="3">
                             <Grid.RowDefinitions>
                                 <RowDefinition />
-                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto" />
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Row="0" 
-                                        Orientation="Vertical" 
-                                        VerticalAlignment="Top" >
-                                <Button Command="{Binding DeleteImageCommand}"
-                                        CommandParameter="{Binding Result/FirstFile}" 
-                                        ToolTip="{DynamicResource mainwindow_tooltip_Delete}"
-                                        Background="{Binding Result/, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource deleteBackgroundValueConverter},
-                                            ConverterParameter={x:Static objectModel:PositionInDuplPair.First}}">
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/DeleteIcon16.png" MaxHeight="24" />
+                            <StackPanel
+                                Grid.Row="0"
+                                VerticalAlignment="Top"
+                                Orientation="Vertical">
+                                <Button
+                                    Background="{Binding Result/, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource deleteBackgroundValueConverter}, ConverterParameter={x:Static objectModel:PositionInDuplPair.First}}"
+                                    Command="{Binding DeleteImageCommand}"
+                                    CommandParameter="{Binding Result/FirstFile}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_Delete}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/DeleteIcon16.png" />
                                 </Button>
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_MoveFirstToNeighbourDirectory}" 
+                                <Button
                                     Command="{Binding MoveFirstToNeighbourDirectoryCommand}"
-                                    CommandParameter="{Binding Result}" 
-                                    Style="{StaticResource CollapsedButton}" >
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/MoveFirstToSecondVerticalButton.png" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    Style="{StaticResource CollapsedButton}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_MoveFirstToNeighbourDirectory}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MoveFirstToSecondVerticalButton.png" />
                                 </Button>
-                                <Button ToolTip="{Binding RenameFirstLikeSecondText, Mode=OneWay}"
+                                <Button
                                     Command="{Binding RenameFirstLikeSecondCommand}"
-                                    CommandParameter="{Binding Result}" >
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/AB.jpg" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    ToolTip="{Binding RenameFirstLikeSecondText, Mode=OneWay}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/AB.jpg" />
                                 </Button>
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_MoveAndRename}" 
+                                <Button
                                     Command="{Binding MoveAndRenameCommand}"
                                     CommandParameter="{Binding Result}"
-                                    Style="{StaticResource CollapsedButton}">
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/MoveAndRenameSecondLikeFirstVertical.png" 
-                                           MaxHeight="24" />
+                                    Style="{StaticResource CollapsedButton}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_MoveAndRename}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MoveAndRenameSecondLikeFirstVertical.png" />
                                 </Button>
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_ReplaseNeighbour}"
+                                <Button
                                     Command="{Binding ReplaseSecondCommand}"
-                                    CommandParameter="{Binding Result}">
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/ReplaceSecondVerticalButton.png" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_ReplaseNeighbour}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/ReplaceSecondVerticalButton.png" />
                                 </Button>
                             </StackPanel>
-                            <Button Grid.Row="1"
-                                    ToolTip="{DynamicResource mainwindow_tooltip_Ignore}" 
-                                    Command="{Binding ExecuteIgnorePairCommand}" 
-                                    CommandParameter="{Binding Result}" >
-                                <Image Source ="/AntiDupl.NET.WPF;component/Image/MistakeButton.png" 
-                                       MaxHeight="24" />
+                            <Button
+                                Grid.Row="1"
+                                Command="{Binding ExecuteIgnorePairCommand}"
+                                CommandParameter="{Binding Result}"
+                                ToolTip="{DynamicResource mainwindow_tooltip_Ignore}">
+                                <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MistakeButton.png" />
                             </Button>
 
-                            <StackPanel Grid.Row="2"
-                                        Orientation="Vertical" 
-                                        VerticalAlignment="Bottom">
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_MoveSecondToNeighbourDirectory}" 
+                            <StackPanel
+                                Grid.Row="2"
+                                VerticalAlignment="Bottom"
+                                Orientation="Vertical">
+                                <Button
                                     Command="{Binding MoveSecondToNeighbourDirectoryCommand}"
-                                    CommandParameter="{Binding Result}" 
-                                    Style="{StaticResource CollapsedButton}" >
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/MoveSecondToFirstVerticalButton.png" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    Style="{StaticResource CollapsedButton}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_MoveSecondToNeighbourDirectory}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MoveSecondToFirstVerticalButton.png" />
                                 </Button>
-                                <Button ToolTip="{Binding RenameSecondLikeFirstText, Mode=OneWay}"
+                                <Button
                                     Command="{Binding RenameSecondLikeFirstCommand}"
-                                    CommandParameter="{Binding Result}" >
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/AB.jpg" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    ToolTip="{Binding RenameSecondLikeFirstText, Mode=OneWay}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/AB.jpg" />
                                 </Button>
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_MoveAndRename}" 
+                                <Button
                                     Command="{Binding MoveAndRenameCommand}"
                                     CommandParameter="{Binding Result}"
-                                    Style="{StaticResource CollapsedButton}">
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/MoveAndRenameSecondLikeFirstVertical.png" 
-                                           MaxHeight="24" />
+                                    Style="{StaticResource CollapsedButton}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_MoveAndRename}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/MoveAndRenameSecondLikeFirstVertical.png" />
                                 </Button>
-                                <Button ToolTip="{DynamicResource mainwindow_tooltip_ReplaseNeighbour}"
+                                <Button
                                     Command="{Binding ReplaseFirstCommand}"
-                                    CommandParameter="{Binding Result}" >
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/ReplaceFirstVerticalButton.png" 
-                                           MaxHeight="24" />
+                                    CommandParameter="{Binding Result}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_ReplaseNeighbour}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/ReplaceFirstVerticalButton.png" />
                                 </Button>
-                                <Button Command="{Binding DeleteImageCommand}"
-                                        CommandParameter="{Binding Result/SecondFile}" 
-                                        ToolTip="{DynamicResource mainwindow_tooltip_Delete}" 
-                                        Background="{Binding Result/, Converter={StaticResource deleteBackgroundValueConverter},
-                                        ConverterParameter={x:Static objectModel:PositionInDuplPair.Second}}">
-                                    <Image Source ="/AntiDupl.NET.WPF;component/Image/DeleteIcon16.png" 
-                                           MaxHeight="24" />
+                                <Button
+                                    Background="{Binding Result/, Converter={StaticResource deleteBackgroundValueConverter}, ConverterParameter={x:Static objectModel:PositionInDuplPair.Second}}"
+                                    Command="{Binding DeleteImageCommand}"
+                                    CommandParameter="{Binding Result/SecondFile}"
+                                    ToolTip="{DynamicResource mainwindow_tooltip_Delete}">
+                                    <Image MaxHeight="24" Source="/AntiDupl.NET.WPF;component/Image/DeleteIcon16.png" />
                                 </Button>
                             </StackPanel>
                         </Grid>
-
                     </Grid>
 
-                    <DataGrid Grid.Column="2"
-                        ItemsSource="{Binding Result}" 
+                    <DataGrid
+                        Grid.Column="2"
                         AutoGenerateColumns="False"
                         CanUserAddRows="False"
                         IsSynchronizedWithCurrentItem="True"
-                        Style="{StaticResource DataGridAlternation}"
-                        RowStyle="{StaticResource BackgroundControlAlternation}">
+                        ItemsSource="{Binding Result}"
+                        RowStyle="{StaticResource BackgroundControlAlternation}"
+                        Style="{StaticResource DataGridAlternation}">
 
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Header="Difference">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding Difference, Mode=OneWay, StringFormat={}{0:F3}}"
-                                           VerticalAlignment="Center"
-                                           Background="{Binding Difference, Converter={StaticResource differenceValueConverter}}" />
+                                        <TextBlock
+                                            VerticalAlignment="Center"
+                                            Background="{Binding Difference, Converter={StaticResource differenceValueConverter}}"
+                                            Text="{Binding Difference, Mode=OneWay, StringFormat={}{0:F3}}" />
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
 
-                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_GridColumn_ImageInfo}" >
+                            <DataGridTemplateColumn Header="{DynamicResource mainwindow_GridColumn_ImageInfo}" Width="*">
                                 <DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                         <Grid Style="{StaticResource BackgroundPanelAlternation}">
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto"/>
-                                                <!--Path-->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--FileSize-->
+                                                <!--  Path  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Resolution-->
+                                                <!--  FileSize  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Blockiness-->
+                                                <!--  Resolution  -->
                                                 <ColumnDefinition Width="Auto" />
-                                                <!--Bluring-->
-                                                <ColumnDefinition Width="*"/>
-                                                <!--UtilityIndex-->
+                                                <!--  Blockiness  -->
+                                                <ColumnDefinition Width="Auto" />
+                                                <!--  Bluring  -->
+                                                <ColumnDefinition Width="*" />
+                                                <!--  UtilityIndex  -->
                                             </Grid.ColumnDefinitions>
                                             <Grid.RowDefinitions>
                                                 <RowDefinition />
@@ -983,227 +1102,302 @@
 
                                             <Grid.ContextMenu>
                                                 <ContextMenu>
-                                                    <MenuItem Header="{DynamicResource mainwindow_contextmenu_OpenСomparator}"
+                                                    <MenuItem
                                                         Command="{Binding DataContext.OpenComparatorForDuplPairCommand, Source={x:Reference dummyElement}}"
-                                                        CommandParameter="{Binding}"/>
+                                                        CommandParameter="{Binding}"
+                                                        Header="{DynamicResource mainwindow_contextmenu_OpenСomparator}" />
                                                 </ContextMenu>
                                             </Grid.ContextMenu>
 
-                                            <TextBox Grid.Row="0" Grid.Column="0"
-                                                     Text="{Binding FirstFile.Path, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                     IsReadOnly="True"
-                                                     VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="0"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Path, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource folderAreDiffrentMultuValueConverter}" >
-                                                        <Binding Path="FolderAreDiffrent" Mode="OneWay" />
-                                                        <Binding Path="DataContext.Configuration.FolderAreDiffrentColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                    <MultiBinding Converter="{StaticResource folderAreDiffrentMultuValueConverter}">
+                                                        <Binding Mode="OneWay" Path="FolderAreDiffrent" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.FolderAreDiffrentColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox Grid.Row="1" Grid.Column="0"
-                                                     Text="{Binding SecondFile.Path, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                                     IsReadOnly="True"
-                                                     VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="0"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Path, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource folderAreDiffrentMultuValueConverter}" >
-                                                        <Binding Path="FolderAreDiffrent" Mode="OneWay" />
-                                                        <Binding Path="DataContext.Configuration.FolderAreDiffrentColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                    <MultiBinding Converter="{StaticResource folderAreDiffrentMultuValueConverter}">
+                                                        <Binding Mode="OneWay" Path="FolderAreDiffrent" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.FolderAreDiffrentColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="0" 
-                                                      Grid.Column="1"
-                                                      Text="{Binding FirstFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{DynamicResource mainwindow_tooltip_FileSize}"  
-                                                      VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_FileSize}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.FileSize}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.FileSize}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="1" 
-                                                      Grid.Column="1"
-                                                      Text="{Binding SecondFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{DynamicResource mainwindow_tooltip_FileSize}" 
-                                                      VerticalAlignment="Top">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="1"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.FileSize, Mode=OneWay, Converter={StaticResource fileSizeConverter}}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_FileSize}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.FileSize}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.FileSize}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="0" Grid.Column="2"
-                                                      Text="{Binding FirstFile.Resolution, Mode=OneWay}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{DynamicResource mainwindow_tooltip_Resolution}" 
-                                                      VerticalAlignment="Bottom">
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Resolution, Mode=OneWay}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_Resolution}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Resolution}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Resolution}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="1" 
-                                                      Grid.Column="2"
-                                                      Text="{Binding SecondFile.Resolution, Mode=OneWay}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{DynamicResource mainwindow_tooltip_Resolution}"  
-                                                      VerticalAlignment="Top">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="2"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Resolution, Mode=OneWay}"
+                                                ToolTip="{DynamicResource mainwindow_tooltip_Resolution}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Resolution}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Resolution}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="0" 
-                                                      Grid.Column="3"
-                                                      Text="{Binding FirstFile.Blockiness, Mode=OneWay, StringFormat=G2}" 
-                                                      IsReadOnly="True"
-                                                      VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Blockiness, Mode=OneWay, StringFormat=G2}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}" />
                                                             <Run Text=":" />
-                                                            <Run Text="{Binding FirstFile.Blockiness, Mode=OneWay}"/>
+                                                            <Run Text="{Binding FirstFile.Blockiness, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="1" Grid.Column="3"
-                                                      Text="{Binding SecondFile.Blockiness, Mode=OneWay, StringFormat=G2}"
-                                                      IsReadOnly="True"
-                                                      VerticalAlignment="Top">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="3"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Blockiness, Mode=OneWay, StringFormat=G2}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Blockiness}" />
                                                             <Run Text=":" />
-                                                            <Run Text="{Binding SecondFile.Blockiness, Mode=OneWay}"/>
+                                                            <Run Text="{Binding SecondFile.Blockiness, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Blockiness}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="0" 
-                                                      Grid.Column="4"
-                                                      Text="{Binding FirstFile.Bluring, Mode=OneWay, StringFormat=G3}" 
-                                                      IsReadOnly="True"
-                                                      VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="4"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.Bluring, Mode=OneWay, StringFormat=G3}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                            <Run Text="{DynamicResource mainwindow_tooltip_Bluring}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Bluring}" />
                                                             <Run Text=":" />
-                                                            <Run Text="{Binding FirstFile.Bluring, Mode=OneWay}"/>
+                                                            <Run Text="{Binding FirstFile.Bluring, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Bluring}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Bluring}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="1" 
-                                                      Grid.Column="4"
-                                                      Text="{Binding SecondFile.Bluring, Mode=OneWay, StringFormat=G3}" 
-                                                      IsReadOnly="True"
-                                                      VerticalAlignment="Top">
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="4"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.Bluring, Mode=OneWay, StringFormat=G3}">
                                                 <TextBox.ToolTip>
                                                     <ToolTip>
                                                         <TextBlock>
-                                                            <Run Text="{DynamicResource mainwindow_tooltip_Bluring}"/>
+                                                            <Run Text="{DynamicResource mainwindow_tooltip_Bluring}" />
                                                             <Run Text=":" />
-                                                            <Run Text="{Binding SecondFile.Bluring, Mode=OneWay}"/>
+                                                            <Run Text="{Binding SecondFile.Bluring, Mode=OneWay}" />
                                                         </TextBlock>
                                                     </ToolTip>
                                                 </TextBox.ToolTip>
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.Bluring}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.Bluring}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
 
-                                            <TextBox  Grid.Row="0" Grid.Column="5"
-                                                      Text="{Binding FirstFile.UtilityIndex, Mode=OneWay, StringFormat=G3}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{Binding FirstFile.UtilityIndexCalculateDecription, Mode=OneWay}"
-                                                      VerticalAlignment="Bottom" >
+                                            <TextBox
+                                                Grid.Row="0"
+                                                Grid.Column="5"
+                                                VerticalAlignment="Bottom"
+                                                IsReadOnly="True"
+                                                Text="{Binding FirstFile.UtilityIndex, Mode=OneWay, StringFormat=G3}"
+                                                ToolTip="{Binding FirstFile.UtilityIndexCalculateDecription, Mode=OneWay}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.First}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="FirstFile.UtilityIndex"/>
-                                                        <!--для обновления биндинга-->
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding Path="FirstFile.UtilityIndex" />
+                                                        <!--  для обновления биндинга  -->
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
-                                            <TextBox  Grid.Row="1" Grid.Column="5"
-                                                      Text="{Binding SecondFile.UtilityIndex, Mode=OneWay, StringFormat=G3}" 
-                                                      IsReadOnly="True"
-                                                      ToolTip="{Binding SecondFile.UtilityIndexCalculateDecription, Mode=OneWay}" 
-                                                      VerticalAlignment="Top" >
+                                            <TextBox
+                                                Grid.Row="1"
+                                                Grid.Column="5"
+                                                VerticalAlignment="Top"
+                                                IsReadOnly="True"
+                                                Text="{Binding SecondFile.UtilityIndex, Mode=OneWay, StringFormat=G3}"
+                                                ToolTip="{Binding SecondFile.UtilityIndexCalculateDecription, Mode=OneWay}">
                                                 <TextBox.Background>
-                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" 
-                                                              ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}" >
+                                                    <MultiBinding Converter="{StaticResource duplResultMultiValueConverter}" ConverterParameter="{x:Static convertor:MaxProperty.UtilityIndex}">
                                                         <Binding Mode="OneWay" />
                                                         <Binding Source="{x:Static objectModel:PositionInDuplPair.Second}" />
-                                                        <Binding Path="DataContext.Configuration.GoodColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="DataContext.Configuration.BadColor" Mode="OneWay" Source="{x:Reference dummyElement}" />
-                                                        <Binding Path="SecondFile.UtilityIndex"/>
-                                                        <!--для обновления биндинга-->
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.GoodColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding
+                                                            Mode="OneWay"
+                                                            Path="DataContext.Configuration.BadColor"
+                                                            Source="{x:Reference dummyElement}" />
+                                                        <Binding Path="SecondFile.UtilityIndex" />
+                                                        <!--  для обновления биндинга  -->
                                                     </MultiBinding>
                                                 </TextBox.Background>
                                             </TextBox>
@@ -1211,15 +1405,16 @@
                                     </DataTemplate>
                                 </DataGridTemplateColumn.CellTemplate>
                             </DataGridTemplateColumn>
-
                         </DataGrid.Columns>
                     </DataGrid>
-                    <GridSplitter Grid.Column="1" Width="5"
-                      VerticalAlignment="Stretch" HorizontalAlignment="Center" ShowsPreview="False" />
+                    <GridSplitter
+                        Grid.Column="1"
+                        Width="5"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Stretch"
+                        ShowsPreview="False" />
                 </Grid>
-
             </TabItem>
-
         </TabControl>
     </DockPanel>
 </Window>

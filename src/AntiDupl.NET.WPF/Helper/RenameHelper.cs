@@ -18,7 +18,7 @@ namespace AntiDupl.NET.WPF.Helper
             string menuText;
             if (Path.GetDirectoryName(res.FirstFile.Path) == Path.GetDirectoryName(res.SecondFile.Path))
             {
-                menuText = "Переименовать {0} в {1}";
+                menuText = System.Windows.Application.Current.Resources["mainwindow_tooltip_RenameTo"] as string;
                 string firstNewName = GetSimilarName(res.SecondFile.Path, res.FirstFile.Path);
                 firstToSecond = String.Format(menuText, Path.GetFileName(res.FirstFile.Path), Path.GetFileName(firstNewName));
                 firstToSecondCommand = new RenameLikeCommand(res, firstNewName, PositionInDuplPair.First);
@@ -29,7 +29,7 @@ namespace AntiDupl.NET.WPF.Helper
             }
             else
             {
-                menuText = "Переместить в {0} и переименовать {1} в {2}";
+                menuText = System.Windows.Application.Current.Resources["mainwindow_tooltip_MoveAndRename"] as string;
                 string firstNewName = GetSimilarName(res.SecondFile.Path, res.FirstFile.Path);
                 firstToSecond = String.Format(menuText, Path.GetDirectoryName(res.SecondFile.Path),
                     Path.GetFileName(res.FirstFile.Path), Path.GetFileName(firstNewName));
