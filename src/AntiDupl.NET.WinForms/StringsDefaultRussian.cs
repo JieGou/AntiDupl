@@ -44,7 +44,8 @@ namespace AntiDupl.NET.WinForms
             s.WarningMessage_ChangeFileExtension = "Вы действительно хотите изменить расширение файла?";
 
             s.AboutProgramPanel_CopyrightLabel0_Text = "Copyright (c) 2002-2023 Ермолаев Игорь,";
-            s.AboutProgramPanel_CopyrightLabel1_Text = "2013-2023 Борисов Дмитрий.";
+            s.AboutProgramPanel_CopyrightLabel1_Text = "2013-2023 Борисов Дмитрий,";
+            s.AboutProgramPanel_CopyrightLabel2_Text = "2023-2023 Edi61.";
             s.AboutProgramPanel_ComponentLabel_Text = "Компонент";
             s.AboutProgramPanel_VersionLabel_Text = "Версия";
 
@@ -130,6 +131,10 @@ namespace AntiDupl.NET.WinForms
             s.CoreOptionsForm_NormalizedSizeOfImageLabeledIntegerEdit_Text = "Нормированный размер изображения";
             s.CoreOptionsForm_PenThicknessLabeledIntegerEdit_Text = "Толшина рамки выделения";
 
+            s.CoreOptionsForm_ImageDiffTabPage_Text = "Разница изображений инструмент";
+            s.CoreOptionsForm_ImageDiffExecutablePathLabeledStringEdit_Text = "Исполняемый путь:";
+            s.CoreOptionsForm_ImageDiffExecutableArgumentsLabeledStringEdit_Text = "Исполняемые аргументы (данные %1 %2):";
+
             s.CorePathsForm_Text = "Пути";
             s.CorePathsForm_SearchTabPage_Text = "Искать";
             s.CorePathsForm_IgnoreTabPage_Text = "Пропускать";
@@ -176,6 +181,7 @@ namespace AntiDupl.NET.WinForms
             s.ResultsPreviewDuplPair_MistakeButton_ToolTip_Text = "Пометить текущий результат как ошибочный";
             s.ResultsPreviewDuplPair_OpenBothFoldersButton_ToolTip_Text = "Откройте обе содержащие папки";
             s.ResultsPreviewDuplPair_OpenBothImagesButton_ToolTip_Text = "Откройте оба изображения";
+            s.ResultsPreviewDuplPair_ExternDiffImagesButton_ToolTip_Text = "Открыть разницу изображений с помощью внешнего инструмента";
 
             s.ResultsPreviewDefect_DeleteButton_ToolTip_Text = "Удалить картинку";
             s.ResultsPreviewDefect_MistakeButton_ToolTip_Text = "Пометить текущий результат как ошибочный";

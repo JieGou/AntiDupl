@@ -48,6 +48,7 @@ namespace AntiDupl.NET.WinForms
 
         public string AboutProgramPanel_CopyrightLabel0_Text;
         public string AboutProgramPanel_CopyrightLabel1_Text;
+        public string AboutProgramPanel_CopyrightLabel2_Text;
         public string AboutProgramPanel_ComponentLabel_Text;
         public string AboutProgramPanel_VersionLabel_Text;
 
@@ -133,6 +134,10 @@ namespace AntiDupl.NET.WinForms
         public string CoreOptionsForm_NormalizedSizeOfImageLabeledIntegerEdit_Text;
         public string CoreOptionsForm_PenThicknessLabeledIntegerEdit_Text;
 
+        public string CoreOptionsForm_ImageDiffTabPage_Text;
+        public string CoreOptionsForm_ImageDiffExecutablePathLabeledStringEdit_Text;
+        public string CoreOptionsForm_ImageDiffExecutableArgumentsLabeledStringEdit_Text;
+
         public string CorePathsForm_Text;
         public string CorePathsForm_SearchTabPage_Text;
         public string CorePathsForm_IgnoreTabPage_Text;
@@ -179,6 +184,7 @@ namespace AntiDupl.NET.WinForms
         public string ResultsPreviewDuplPair_MistakeButton_ToolTip_Text;
         public string ResultsPreviewDuplPair_OpenBothFoldersButton_ToolTip_Text;
         public string ResultsPreviewDuplPair_OpenBothImagesButton_ToolTip_Text;
+        public string ResultsPreviewDuplPair_ExternDiffImagesButton_ToolTip_Text;
 
         public string ResultsPreviewDefect_DeleteButton_ToolTip_Text;
         public string ResultsPreviewDefect_MistakeButton_ToolTip_Text;
